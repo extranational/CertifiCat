@@ -1,6 +1,6 @@
 import json
 import operator
-import random
+import secrets
 import string
 from enum import Enum
 from typing import List, Mapping, Self
@@ -131,10 +131,10 @@ class AccountBinding(TimestampMixin):
 
         binding = AccountBinding(
             hmac_id="".join(
-                random.choices(cls.KID_ENTROPY, k=app_settings.hmac_id_length)
+                secrets.choice(cls.KID_ENTROPY) for _ in range(app_settings.hmac_id_length)
             ),
             hmac_key="".join(
-                random.choices(cls.HMAC_ENTROPY, k=app_settings.hmac_key_length)
+                secrets.choice(cls.HMAC_ENTROPY) for _ in range(app_settings.hmac_key_length)
             ),
             creator=creator,
             note=note,

@@ -1,6 +1,7 @@
-import random
+import secrets
 import string
 
 
 def gen_id(length=10) -> str:
-    return "".join(random.choices(string.ascii_letters + string.digits, k=length))
+    alphabet = string.ascii_letters + string.digits
+    return "".join(secrets.choice(alphabet) for _ in range(length))
